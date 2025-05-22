@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Asp_MVC_crud.Models.Employee>
+
+@{
+    ViewBag.Title = "Employee List";
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #e3f2fd, #ffffff);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .employee-container {
+        margin-top: 50px;
+    }
+
+    .table-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .btn-custom {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-right: 6px;
+    }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+
+    .btn-danger-custom {
+        background-color: #dc3545;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+        .btn-danger-custom:hover {
+            background-color: #a71d2a;
+            text-decoration: none;
+            color: white;
+        }
+</style>
+
+<div class="container employee-container">
+    <div class="table-container">
+        <h2>Employee List</h2>
+
+        <p class="text-right">
+            @Html.ActionLink("➕ Add New Employee", "Create", null, new { @class = "btn btn-success" })
+        </p>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th style="width: 150px;">Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Department</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn-custom" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn-danger-custom", onclick = "return confirm('Are you sure to delete this employee?');" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,76 @@
+﻿@model Asp_MVC_crud.Models.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: url('/Content/bg-login.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 100px auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+
+    .form-control {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .icon {
+        margin-right: 8px;
+    }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="login-container">
+    <h2><i class="fa fa-user-circle icon"></i>Login</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label><i class="fa fa-user icon"></i>Username</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter username" })
+        </div>
+
+        <div class="form-group">
+            <label><i class="fa fa-lock icon"></i>Password</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter password" })
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in icon"></i>Login</button>
+    }
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="error-message">
+            @ViewBag.Message
+        </div>
+    }
+</div>
+
